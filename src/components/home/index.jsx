@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link,Route,Switch} from "react-router-dom"
+import {BrowserRouter,Link,Route,Switch} from "react-router-dom"
 import {Layout, Menu, Icon} from 'antd';
 import homeRouters from "../../config/home-routers";
 
@@ -19,6 +19,7 @@ class Home extends Component {
 
   render() {
     return (
+      <BrowserRouter>
         <Layout style={{minHeight: '100vh'}}>
           <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
             <div className="logo"/>
@@ -70,6 +71,8 @@ class Home extends Component {
             <Footer style={{textAlign: 'center'}}> Wolfox Design ©2019 Created by Wolfox</Footer>
           </Layout>
         </Layout>
+      </BrowserRouter>
+
 
 
     );
