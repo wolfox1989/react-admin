@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import Button from 'antd/es/button';
-import './App.css';
+//import {connect} from "react-redux"
+import routers from "./config/routers";
+import {BrowserRouter,Switch,Route} from "react-router-dom"
+import "./index.less"
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Button type="primary">Button</Button>
-      </div>
+      <BrowserRouter>
+        <Switch>
+          {routers.map((item,index)=><Route {...item} key={index}/>)}
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
