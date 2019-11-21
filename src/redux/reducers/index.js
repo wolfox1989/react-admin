@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
-import f from "./f.js"
+import user from "./user.js"
 
 
 
 
-export default combineReducers({f});
+export default combineReducers({user});

@@ -1,4 +1,4 @@
-const {override, fixBabelImports, addLessLoader, addWebpackAlias} = require('customize-cra');
+const {override, fixBabelImports, addLessLoader, addDecoratorsLegacy} = require('customize-cra');
 module.exports = override(
   fixBabelImports('import', {
     libraryName: 'antd',
@@ -12,5 +12,8 @@ module.exports = override(
         '@primary-color': '#f90'
       },
   }),
+  // 添加装饰器语法
+  // yarn add @babel/plugin-proposal-decorators --dev
+  addDecoratorsLegacy()
 );
 

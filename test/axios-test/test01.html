@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="btn1">按钮1</button>
+<button id="btn2">按钮2</button>
+<button id="btn3">按钮3</button>
+<script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+<script>
+  let token="";
+document.querySelector("#btn1").onclick=function () {
+  axios({
+    method:"POST",
+    url:"http://localhost:5000/api/login",
+    data:{username:"admin",password:"admin"}
+  }).then((response)=>{
+    if (response.data.status===0) {
+      console.log("登录成功");
+      token=response.data.data.token;
+    }
+  }).catch((err)=>{
+    console.log(err);
+    alert("网络故障")
+  })
+};
+document.querySelector("#btn2").onclick=function () {
+axios({
+  method:"GET",
+  url:"http://localhost:5000/api/category/get",
+  headers:{
+    authorization:"Bearer "+token
+  }
+}).then((response)=>{
+  if (response.data.status===0) {
+    console.log(response.data.data);
+  }
+}).catch((err)=>{
+  console.log(err);
+  alert("网络故障")
+})
+};
+document.querySelector("#btn3").onclick=function () {
+  axios({
+    method:"POST",
+    url:"http://localhost:5000/api/category/add",
+    headers:{
+      authorization:"Bearer "+token
+    },
+    data:{categoryName:"电脑"}
+  }).then((response)=>{
+    if (response.data.status===0) {
+      console.log(response.data);
+    }
+  }).catch((err)=>{
+    console.log(err);
+    alert("网络故障")
+  })
+};
+</script>
+</body>
+</html>

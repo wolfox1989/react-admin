@@ -1,25 +1,29 @@
+/*
+Login
+*/
 import React, {Component} from 'react';
 import logo from "./logo.png"
-import {Form, Icon, Input, Button, message} from 'antd';
-import axios from "axios";
+import {Form, Icon, Input, Button} from 'antd';
 import "./index.less"
+import {connect} from "react-redux"
+import {getUserSuccessAsync} from "../../redux/action-creators/user";
+import {setItem} from "../../utils/localStorage"
 
+@connect(null, {getUserSuccessAsync})
+@Form.create()
 class Login extends Component {
   handleSubmit = e => {
-    //console.log(this.props);
     const {validateFields, resetFields} = this.props.form;
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {//发送ajax请求
-        axios.post("http://localhost:5000/api/login", values)
+        const {username, password} = values;
+        this.props.getUserSuccessAsync(username, password)
           .then(response => {
-            if (response.data.status === 0) this.props.history.push("/");
-            else {
-              message.error(response.data.msg);
-              resetFields("password")
-            }
-          }).catch(err => message.error('网络故障，请刷新再试')
-        )
+            setItem("user",response);
+            this.props.history.push("/")
+          })
+          .catch(err => resetFields("password"))
       }
     });
   };
@@ -68,4 +72,4 @@ class Login extends Component {
   }
 }
 
-export default Form.create()(Login);
+export default Login;
