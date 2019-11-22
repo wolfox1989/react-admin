@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Layout, Breadcrumb} from 'antd';
 
 const {Content} = Layout;
-class UserContent extends Component {
+class User extends Component {
   render() {
     return (
       <Content>
@@ -15,4 +15,4 @@ class UserContent extends Component {
   }
 }
 
-export default UserContent;
+export default User;

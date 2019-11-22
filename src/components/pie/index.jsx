@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import {Layout, Breadcrumb} from 'antd';
 
 const {Content} = Layout;
-class LineContent extends Component {
+class Pie extends Component {
   render() {
     return (
       <Content>
         <Breadcrumb>
-          <Breadcrumb.Item>LineContent~~~~</Breadcrumb.Item>
+          <Breadcrumb.Item>PieContent~~~~</Breadcrumb.Item>
         </Breadcrumb>
-        <div >LineContent~~~</div>
+        <div >PieContent~~~</div>
       </Content>
     );
   }
 }
 
-export default LineContent;
+export default Pie;

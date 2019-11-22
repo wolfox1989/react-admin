@@ -1,9 +1,12 @@
 import {reqLogin} from "../../api/index"
-import {GET_USER_SUCCESS} from "../action-types/user"
+import {GET_USER_SUCCESS,REMOVE_USER_SUCCESS,} from "../action-types/user"
 //同步 返回action的函数
 const getUserSuccess = data => ({
   type: GET_USER_SUCCESS,
   data
+});
+export const removeUserSuccess = () => ({
+  type: REMOVE_USER_SUCCESS,
 });
 //异步
 export const getUserSuccessAsync = (username, password) => dispatch => reqLogin(username, password).then((response) => {

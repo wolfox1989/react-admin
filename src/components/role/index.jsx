@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import {Layout, Breadcrumb} from 'antd';
 
 const {Content} = Layout;
-class ProductContent extends Component {
+class Role extends Component {
   render() {
     return (
       <Content>
         <Breadcrumb>
-          <Breadcrumb.Item>ProductContent~~~~</Breadcrumb.Item>
+          <Breadcrumb.Item>RoleContent~~~~</Breadcrumb.Item>
         </Breadcrumb>
-        <div >ProductContent~~~</div>
+        <div >RoleContent~~~</div>
       </Content>
     );
   }
 }
 
-export default ProductContent;
+export default Role;

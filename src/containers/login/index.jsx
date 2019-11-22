@@ -2,17 +2,19 @@
 Login
 */
 import React, {Component} from 'react';
-import logo from "./logo.png"
+import logo from "../../assets/logo.png"
 import {Form, Icon, Input, Button} from 'antd';
 import "./index.less"
 import {connect} from "react-redux"
 import {getUserSuccessAsync} from "../../redux/action-creators/user";
 import {setItem} from "../../utils/localStorage"
-
+import withCheckLogin from "../with-check-login"
+@withCheckLogin
 @connect(null, {getUserSuccessAsync})
 @Form.create()
 class Login extends Component {
   handleSubmit = e => {
+    //console.log(this.props)
     const {validateFields, resetFields} = this.props.form;
     e.preventDefault();
     validateFields((err, values) => {

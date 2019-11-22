@@ -5,6 +5,9 @@ import axios from "axios"
 import {message} from 'antd';
 import codeMessage from "../config/code-message.js"
 import store from "../redux/store";
+import history from "../utils/history";
+import {removeItem} from "../utils/localStorage";
+import {removeUserSuccess} from "../redux/action-creators/user"
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:5000/api",
@@ -14,14 +17,12 @@ const axiosInstance = axios.create({
 //请求拦截器
 axiosInstance.interceptors.request.use(
   (config) => {
-   console.log(store.getState());
     let {user:{token}} = store.getState();
-    console.log(token);
     if (token) config.headers.authorization = "Bearer " + token;
     return config
   }
 );
-//响应拦截器
+//响应拦截器 判断token的有效性
 axiosInstance.interceptors.response.use(
   response => {
     if (response.data.status === 0) {
@@ -35,6 +36,11 @@ axiosInstance.interceptors.response.use(
     let errorMessage = "";
     if (error.response) {
       errorMessage = codeMessage[error.response.status] || '未知错误';
+      if(error.response.status===401){//非法token
+        history.replace("/login");
+        removeItem("user");
+        store.dispatch(removeUserSuccess())
+      }
     } else {
       if (error.message.indexOf('Network Error') !== -1) {
         errorMessage = '请检查网络连接';
