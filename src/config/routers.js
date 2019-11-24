@@ -1,6 +1,6 @@
 import Login from "../containers/login"
 import Home from "../components/home"
-import Category from "../components/category"
+import Category from "../containers/category"
 import User from "../components/user"
 import Product from "../components/product"
 import Bar from "../components/bar"

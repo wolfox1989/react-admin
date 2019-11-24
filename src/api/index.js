@@ -11,4 +11,9 @@ import axiosInstance from "./request"
       password
     }
   });
+//请求
+export const reqCategory= ()=>axiosInstance({
+  method: "GET",
+  url: "/category/get",
+});
 
