@@ -28,7 +28,7 @@ class HeaderMain extends Component {
   state = {
     isScreenFull: false,
     date: dayjs().format("YYYY-MM-DD HH:mm:ss"),
-    isEnglish: false
+    isEnglish: true
   };
   /*fullscreen*/
   handelScreen = () => screenfull.toggle();
@@ -51,10 +51,11 @@ class HeaderMain extends Component {
     const {isEnglish} = this.state;
     //console.log(i18n.language);
     //console.log(i18n.changeLanguage);
-    i18n.changeLanguage(isEnglish ? "en" : "zh");
     this.setState({
       isEnglish: !isEnglish
-    })
+    });
+    i18n.changeLanguage(isEnglish ? "en" : "zh");
+
   };
 
   /*logout*/
@@ -68,7 +69,7 @@ class HeaderMain extends Component {
       },
     })
   };
-  /*switch title*/
+  /*switch title:优化下*/
   findTitle = (menus) => {
     const {pathname} = this.props.location;
     for (let i = 0; i < menus.length; i++) {

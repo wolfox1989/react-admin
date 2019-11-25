@@ -11,9 +11,34 @@ import axiosInstance from "./request"
       password
     }
   });
-//请求
+//请求Category
 export const reqCategory= ()=>axiosInstance({
   method: "GET",
   url: "/category/get",
+});
+//addCategory
+export const reqAddCategory= (categoryName)=>axiosInstance({
+  method: "POST",
+  url: "/category/add",
+  data:{
+    categoryName
+  }
+});
+//updateCategory
+export const reqUpdateCategory= (categoryId,categoryName)=>axiosInstance({
+  method: "POST",
+  url: "/category/update",
+  data:{
+    categoryId,
+    categoryName
+  }
+});
+//removeCategory
+export const reqRemoveCategory= (categoryId)=>axiosInstance({
+  method: "POST",
+  url: "/category/delete",
+  data:{
+    categoryId
+  }
 });
 
