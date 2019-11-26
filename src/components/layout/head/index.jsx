@@ -76,7 +76,7 @@ class HeaderMain extends Component {
       const menu = menus[i];
       if (menu.path && menu.path === pathname) return menu.title;
       if (menu.children) {
-        const secondMenu = menu.children.find(secondMenu => secondMenu.path === pathname);
+        const secondMenu = menu.children.find(secondMenu => pathname.startsWith(secondMenu.path));
         if (secondMenu) return secondMenu.title;
       }
     }

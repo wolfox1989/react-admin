@@ -17,9 +17,7 @@ function category(prevState = [], action) {
         return item;
       });
     case REMOVE_Category_SUCCESS:
-      return prevState.filter(item => {
-        if (item._id !== action.data) return item;
-      });
+      return prevState.filter(item =>item._id !== action.data);
     default:
       return prevState;
   }

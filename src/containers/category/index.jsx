@@ -30,7 +30,7 @@ class Category extends Component {
   };
 
   componentDidMount() {
-    this.props.getCategorySuccessAsync()
+    if (!this.props.category.length) this.props.getCategorySuccessAsync()
   }
 
   columns = [

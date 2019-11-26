@@ -7,6 +7,8 @@ import Bar from "../components/bar"
 import Line from "../components/line"
 import Role from "../components/role"
 import Pie from "../components/pie"
+import ProductForm from "../components/product/productForm";
+import ProductDetail from "../components/product/detail";
 import NotMatch from "../components/not-match"
 
 
@@ -50,6 +52,21 @@ const authRoutes = [
   {
     path: "/charts/line",
     component: Line,
+    exact: true
+  },
+  {
+    path: "/product/add",
+    component: ProductForm,
+    exact: true
+  },
+  {
+    path: "/product/update/:id",
+    component: ProductForm,
+    exact: true
+  },
+  {
+    path: "/product/:id",
+    component: ProductDetail,
     exact: true
   },
   {//放在最后
