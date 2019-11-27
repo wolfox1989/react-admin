@@ -101,14 +101,13 @@ export const updateProductStatus = (productId,status) => axiosInstance({
   }
 });
 //searchProduct
-export const searchProduct = ({productName, productDesc,pageSize,pageNum}) => axiosInstance({
+export const searchProduct = ({searchType, searchValue,pageSize,pageNum}) => axiosInstance({
   method: "GET",
   url: "/product/search",
   params: {
-    productName,
-    productDesc,
     pageSize,
-    pageNum
+    pageNum,
+    [searchType]:searchValue
   }
 });
 
