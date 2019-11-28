@@ -110,4 +110,56 @@ export const searchProduct = ({searchType, searchValue,pageSize,pageNum}) => axi
     [searchType]:searchValue
   }
 });
+//addRole
+export const addRole = (name) => axiosInstance({
+  method: "POST",
+  url: "/role/add",
+  data: {
+    name
+  }
+});
+//getRole
+export const getRole = () => axiosInstance({
+  method: "GET",
+  url: "/role/get",
+});
+//updateRole
+export const updateRole = (roleId,authName,menus) => axiosInstance({
+  method: "POST",
+  url: "/role/update",
+  data: {
+    roleId,authName,menus
+  }
+});
+//deleteRole
+export const deleteRole = (roleId) => axiosInstance({
+  method: "POST",
+  url: "/role/delete",
+  data: {
+    roleId
+  }
+});
+//getUsers
+export const getUsers = () => axiosInstance({
+  method: "GET",
+  url: "/user/get",
+});
+//addUser
+export const addUser = ({username,password,phone,email,roleId}) => axiosInstance({
+  method: "POST",
+  url: "/user/add",
+  data:{username,password,phone,email,roleId}
+});
+//updateUser
+export const updateUser = (username,password) => axiosInstance({
+  method: "POST",
+  url: "/user/update",
+  data:{username,password}
+});
+//deleteUser
+export const deleteUser = (username) => axiosInstance({
+  method: "POST",
+  url: "/user/delete",
+  data:{username}
+});
 
