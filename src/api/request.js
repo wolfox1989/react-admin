@@ -8,15 +8,30 @@ import store from "../redux/store";
 import history from "../utils/history";
 import {removeItem} from "../utils/localStorage";
 import {removeUserSuccess} from "../redux/action-creators/user"
-
+const cancelTokenMap = new Map();
 const axiosInstance = axios.create({
   baseURL: "http://localhost:5000/api",
   timeout: 10000,
   headers: {}
 });
+// 一旦地址发生变化，就要取消上一个地址的所有请求。（当当前地址和之前保存的地址不一样时）
+history.listen(pathname =>cancelTokenMap.forEach((key, value) => {
+    if (value.pathname !== pathname) {
+      value.cancel('cancel request');
+      cancelTokenMap.delete(key);//map.delete(key)：移除任何与键相关联的值，并且返回该值
+    }
+  })
+);
 //请求拦截器
 axiosInstance.interceptors.request.use(
   (config) => {
+    // cancel是一个函数，一旦调用就能取消ajax请求
+    config.cancelToken = new axios.CancelToken(cancel=> {
+      cancelTokenMap.set(Symbol(Date.now()), {//map.set(key,val):设置Map对象中键的值,返回该Map对象
+        pathname: history.pathname,
+        cancel
+      })
+    });
     let {user:{token}} = store.getState();
     if (token) config.headers.authorization = "Bearer " + token;
     return config

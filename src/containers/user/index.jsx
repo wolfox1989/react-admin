@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Button, Card, Modal, Table, message} from 'antd';
 import {connect} from "react-redux"
 import dayjs from "dayjs";
@@ -126,7 +126,7 @@ class User extends Component {
 
 
   render() {
-    return <div>
+    return <Fragment>
       <Card title={<div><Button type="primary" onClick={this.addUser}>创建用户</Button>
       </div>}>
         <Table
@@ -137,7 +137,6 @@ class User extends Component {
           defaultPageSize: 3
         }}>
         </Table>
-
       </Card>
       <Modal
         title="创建用户"
@@ -155,8 +154,7 @@ class User extends Component {
       >
         <UpdateUserForm wrappedComponentRef={formRef => this.updateUserFormRef = formRef}/>
       </Modal>
-
-    </div>
+    </Fragment>
   }
 }
 

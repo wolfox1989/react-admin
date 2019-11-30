@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,Fragment} from 'react';
 import {Button, Card, Modal, Radio, Table} from 'antd';
 import {connect} from "react-redux"
 import {getRoleAsync, addRoleAsync,updateRoleAsync,deleteRoleAsync} from "../../redux/action-creators/role"
@@ -74,7 +74,6 @@ class Role extends Component {
     const {form} = this.setRoleFormRef.props;
     form.validateFields(async (err, values) => {
       if (!err) {
-        console.log(values);
          await this.props.updateRoleAsync(value,authName,values.menus);
         this.handleCancel("set")();
       }
@@ -100,8 +99,7 @@ class Role extends Component {
   render() {
     const {isDisabled,value} = this.state;
     const {role} = this.props;
-    //console.log(role);
-    return <div>
+    return <Fragment>
       <Card title={<div><Button type="primary" onClick={this.addRole}>创建角色</Button>
         <Button disabled={isDisabled} onClick={this.setRole}>设置角色权限</Button>
         <Button disabled={isDisabled} onClick={this.showDeleteConfirm} type="dashed">删除角色</Button></div>}>
@@ -132,7 +130,7 @@ class Role extends Component {
       >
         <SetRoleForm wrappedComponentRef={formRef => this.setRoleFormRef = formRef} role={role} id={value}/>
       </Modal>
-    </div>
+    </Fragment>
   }
 }
 

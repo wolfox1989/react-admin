@@ -3,10 +3,10 @@ import Home from "../components/home"
 import Category from "../containers/category"
 import User from "../containers/user"
 import Product from "../components/product"
-import Bar from "../components/bar"
-import Line from "../components/line"
+import Bar from "../components/charts/bar"
+import Line from "../components/charts/line"
 import Role from "../containers/role"
-import Pie from "../components/pie"
+import Pie from "../components/charts/pie"
 import ProductForm from "../components/product/productForm";
 import ProductDetail from "../components/product/detail";
 import NotMatch from "../components/not-match"

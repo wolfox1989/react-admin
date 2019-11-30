@@ -162,8 +162,10 @@
 
 Redirect 在组件内render内部使用
 组件非render内，只能用this.props.history；
+    (push传参，组件可以通过location.state获取第二个参数)
 非组件，需要react封装的history 
 
 高阶组件的包裹组件，注意将props给传递下去；
 否则被包裹组件会失去原本的props；
 别人定义好的比如connect已经做好这方面。
+

@@ -28,7 +28,9 @@ class HeaderMain extends Component {
   state = {
     isScreenFull: false,
     date: dayjs().format("YYYY-MM-DD HH:mm:ss"),
-    isEnglish: true
+    isEnglish: true,
+    pathname:"",
+    title:""
   };
   /*fullscreen*/
   handelScreen = () => screenfull.toggle();
@@ -49,8 +51,6 @@ class HeaderMain extends Component {
   /*i18n*/
   changeLanguage = () => {
     const {isEnglish} = this.state;
-    //console.log(i18n.language);
-    //console.log(i18n.changeLanguage);
     this.setState({
       isEnglish: !isEnglish
     });
@@ -69,22 +69,35 @@ class HeaderMain extends Component {
       },
     })
   };
-  /*switch title:优化下*/
-  findTitle = (menus) => {
-    const {pathname} = this.props.location;
+  /*switch title:优化*/
+  static getDerivedStateFromProps(nextProps,prevState){
+    const {pathname} = nextProps.location;
+    if(pathname===prevState.pathname) return prevState;
+    let title="";
     for (let i = 0; i < menus.length; i++) {
       const menu = menus[i];
-      if (menu.path && menu.path === pathname) return menu.title;
+      if (menu.path && menu.path === pathname){
+        title=menu.title;
+        break;
+      }
       if (menu.children) {
         const secondMenu = menu.children.find(secondMenu => pathname.startsWith(secondMenu.path));
-        if (secondMenu) return secondMenu.title;
+        if (secondMenu) {
+          title=secondMenu.title;
+          break;
+        }
       }
     }
-  };
+    return {
+      pathname,
+      title
+    };
+  }
+
 
   render() {
     const {t} = this.props;
-    const {isScreenFull, date, isEnglish} = this.state;
+    const {isScreenFull, date, isEnglish,title} = this.state;
     const {username} = this.props;
     return <div className="header-main">
       <div className="header-main-top">
@@ -94,7 +107,7 @@ class HeaderMain extends Component {
         <Button type="link" onClick={this.showConfirm}>{t('layout.head.logout')}</Button>
       </div>
       <div className="header-main-bottom">
-        <h3>{t('layout.left.' + this.findTitle(menus))}</h3>
+        <h3>{t('layout.left.' + title)}</h3>
         <span>{date}</span>
       </div>
     </div>;
